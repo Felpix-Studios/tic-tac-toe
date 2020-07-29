@@ -15,8 +15,8 @@ def compTurn():
                 score = minimax(board,0,False)
                 board[x][y] = "-"
                 if score>bestScore:
-                bestScore=score
-                move = (x,y)
+                    bestScore=score
+                    move = (x,y)
     board[move[0]][move[1]] = "O"
     display_board()
 
