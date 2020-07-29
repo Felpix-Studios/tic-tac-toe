@@ -6,6 +6,19 @@ board = [["-","-","-"],
         ["-","-","-"]]
 
 def compTurn():
+    bestScore = -999
+    move = None
+    for x in range(3):
+        for y in range(3):
+            if board[x][y] == "-":
+                board[x][y] = "O"
+                score = minimax(board,0,False)
+                board[x][y] = "-"
+                if score>bestScore:
+                bestScore=score
+                move = (x,y)
+    board[move[0]][move[1]] = "O"
+    display_board()
 
 def minimax(board,depth,player):
     result = checkWin()
