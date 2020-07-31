@@ -70,6 +70,34 @@ def checkWin():
         print("Board Full")
         return "Tie"
 
+def checkWinTest():
+    row_1 = board[0][0] == board[0][1] == board[0][2] != "-"
+    row_2 = board[1][0] == board[1][1] == board[1][2] != "-"
+    row_3 = board[2][0] == board[2][1] == board[2][2] != "-"
+    col_1 = board[0][0] == board[1][0] == board[2][0] != "-"
+    col_2 = board[0][1] == board[1][1] == board[2][1] != "-"
+    col_3 = board[0][2] == board[1][2] == board[2][2] != "-"
+    diag_1 = board[0][0] == board[1][1] == board[2][2] != "-"
+    diag_2 = board[0][2] == board[1][1] == board[2][0] != "-"
+    if row_1:
+        return board[0][0]
+    elif row_2:
+        return board[1][0]
+    elif row_3:
+        return board[2][0]
+    elif col_1:
+        return board[0][0]
+    elif col_2:
+        return board[0][1]
+    elif col_3:
+        return board[0][2]
+    elif diag_1:
+        return board[0][0]
+    elif diag_2:
+        return board[0][2]
+    elif "-" not in board[0] and "-" not in board[1] and "-" not in board[2]:
+        print("Board Full")
+        return "Tie"
 
 def flip_player():
     global curr_player
