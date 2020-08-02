@@ -20,15 +20,35 @@ def compTurn():
     board[move[0]][move[1]] = "O"
     display_board()
 
-def minimax(board,depth,player):
-    result = checkWin()
+def minimax(board,depth,isMaximizing):
+    result = checkWinTest()
     if result != None:
         if result == "X":
             return -10
-        elif result == "O"
+        elif result == "O":
             return 10
         else:
             return 0
+    if(isMaximizing):
+        bestScore = -999
+        for x in range(3):
+            for y in range(3):
+                if board[x][y] == "-":
+                    board[x][y] = "O"
+                    score = minimax(board,depth+1,False)
+                    board[x][y] = "-"
+                    bestScore=max(score,bestScore)
+        return bestScore
+    else:
+        bestScore = 999
+        for x in range(3):
+            for y in range(3):
+                if board[x][y] ==  "-":
+                    board[x][y] = "X"
+                    score = minimax(board,depth+1,True)
+                    board[x][y] = "-"
+                    bestScore = min(score,bestScore)
+        return bestScore
     
 def display_board():
     print("\n")
@@ -96,7 +116,6 @@ def checkWinTest():
     elif diag_2:
         return board[0][2]
     elif "-" not in board[0] and "-" not in board[1] and "-" not in board[2]:
-        print("Board Full")
         return "Tie"
 
 def flip_player():
@@ -162,12 +181,20 @@ def main():
     while game_logic:
         playerTurn(curr_player)
         winner=checkWin()
+        if winner == "X" or winner =="O":
+            print(winner+" won.")
+            break
+        elif winner == "Tie":
+            print("Tie.")
+            break
         compTurn()
         winner=checkWin()
-    if winner == "X" or winner =="O":
-        print(winner+" won.")
-    elif winner == "Tie":
-        print("Tie.")
+        if winner == "X" or winner =="O":
+            print(winner+" won.")
+            break
+        elif winner == "Tie":
+            print("Tie.")
+            break
 
 
 
